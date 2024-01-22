@@ -67,7 +67,7 @@ return {
                 capabilities = capabilities,
                 init_options = {
                     preferences = {
-                        disableSuggestions = true,
+                        disableSuggestions = false,
                     }
                 }
             })
@@ -75,6 +75,73 @@ return {
             lspconfig.pyright.setup({
                 on_attach = custom_attach,
                 capabilities = capabilities,
+            })
+            --Tailwind language server
+            lspconfig.tailwindcss.setup({
+                 on_attach = custom_attach,
+                capabilities = capabilities,
+            })
+            --Vue.js language server
+            lspconfig.vuels.setup({
+               on_attach = custom_attach,
+               capabilities = capabilities,
+               settings = {
+                   cmd = { "vls" },
+                   filetypes = { "vue" },
+                   init_options = {
+                       config = {
+                           css = {},
+                           emmet = {},
+                           html = {
+                               suggest = {}
+                           },
+                           javascript = {
+                               format = {}
+                           },
+                           stylusSupremacy = {},
+                           typescript = {
+                               format = {}
+                           },
+                           vetur = {
+                               completion = {
+                                   autoImport = false,
+                                   tagCasing = "kebab",
+                                   useScaffoldSnippets = false
+                               },
+                               format = {
+                                   defaultFormatter = {
+                                       js = "none",
+                                       ts = "none"
+                                   },
+                                   defaultFormatterOptions = {},
+                                   scriptInitialIndent = false,
+                                   styleInitialIndent = false
+                               },
+                               useWorkspaceDependencies = false,
+                               validation = {
+                                   script = true,
+                                   style = true,
+                                   template = true
+                               }
+                           }
+                       }
+                   }
+               }
+            })
+            --CSS language server
+            lspconfig.cssls.setup({
+                  on_attach = custom_attach,
+                  capabilities = capabilities,
+            })
+            lspconfig.cssmodules_ls.setup({
+                 on_attach = custom_attach,
+                  capabilities = capabilities,
+                  settings = {
+                    cssmodules_ls = {
+                        cmd = { "cssmodules-language-server" },
+                        filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+                    },
+                }
             })
             -- new server goes here:
             -- lspconfig.SERVER.setup({
