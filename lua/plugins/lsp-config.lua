@@ -90,17 +90,17 @@ return {
                    filetypes = { "vue" },
                    init_options = {
                        config = {
-                           css = {},
+                           css = { cssmodules_ls },
                            emmet = {},
                            html = {
-                               suggest = {}
+                               suggest = { html }
                            },
                            javascript = {
-                               format = {}
+                               format = { tsserver }
                            },
                            stylusSupremacy = {},
                            typescript = {
-                               format = {}
+                               format = {tsserver }
                            },
                            vetur = {
                                completion = {
@@ -110,8 +110,8 @@ return {
                                },
                                format = {
                                    defaultFormatter = {
-                                       js = "none",
-                                       ts = "none"
+                                       js = "prettier",
+                                       ts = "prettier"
                                    },
                                    defaultFormatterOptions = {},
                                    scriptInitialIndent = false,
