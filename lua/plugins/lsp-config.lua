@@ -1,19 +1,5 @@
 return {
-  {
-    "williamboman/mason.nvim",
-    lazy = false,
-    config = function()
-      require("mason").setup()
-    end,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    lazy = false,
-    opts = {
-      auto_install = true,
-    },
-  },
-  {
+    {
     'neovim/nvim-lspconfig',
         config = function()
             local lspconfig = require('lspconfig')
@@ -65,10 +51,27 @@ return {
             lspconfig.tsserver.setup({
                 on_attach = custom_attach,
                 capabilities = capabilities,
-                init_options = {
-                    preferences = {
-                        disableSuggestions = false,
-                    }
+                maxTsServerMemory = 16000,
+            })
+            lspconfig["emmet_ls"].setup({
+                capabilities = capabilities,
+                on_attach = custom_attach,
+                filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+            })
+            --html language server
+            lspconfig.html.setup({
+                on_attach = custom_attach,
+                capabilities = capabilities,
+                settings = {
+                    cmd = { "vscode-html-language-server", "--stdio" },
+                    filetypes = { "html" },
+                    init_options = {
+                        configurationSection = { "html", "css", "javascript" },
+                        embeddedLanguages = {
+                            css = true,
+                            javascript = true
+                        }
+                    },
                 }
             })
             --Python language server
@@ -90,17 +93,17 @@ return {
                    filetypes = { "vue" },
                    init_options = {
                        config = {
-                           css = { cssmodules_ls },
+                           css = {},
                            emmet = {},
                            html = {
-                               suggest = { html }
+                               suggest = {}
                            },
                            javascript = {
-                               format = { tsserver }
+                               format = {}
                            },
                            stylusSupremacy = {},
                            typescript = {
-                               format = {tsserver }
+                               format = {}
                            },
                            vetur = {
                                completion = {

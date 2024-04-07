@@ -14,6 +14,7 @@ return {
 				"query",
 				"xml",
 				"vue",
+                "css"
 			},
 
 			auto_install = false,
