@@ -47,26 +47,50 @@ return {
                     },
                 }
             })
-            --TS language server
+            --TS language server 
             lspconfig.tsserver.setup({
                 on_attach = custom_attach,
                 capabilities = capabilities,
                 maxTsServerMemory = 16000,
-            })
-            lspconfig["emmet_ls"].setup({
+            }) 
+            lspconfig.emmet_ls.setup({
+                --on_attach = custom_attach,
                 capabilities = capabilities,
-                on_attach = custom_attach,
-                filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+                filetypes = {
+                    "css",
+                    "eruby",
+                    "html",
+                    "javascript",
+                    "javascriptreact",
+                    "javascript.jsx",
+                    "less",
+                    "sass",
+                    "typescript",
+                    "typescript.tsx",
+                    "scss",
+                    "svelte",
+                    "pug",
+                    "typescriptreact",
+                    "vue",
+                },
+                init_options = {
+                    html = {
+                        options = {
+                            ["bem.enabled"] = true,
+                        },
+                    },
+                },
             })
+
             --html language server
             lspconfig.html.setup({
                 on_attach = custom_attach,
                 capabilities = capabilities,
                 settings = {
                     cmd = { "vscode-html-language-server", "--stdio" },
-                    filetypes = { "html" },
+                    filetypes = { "html", "typescriptreact", "javascriptreact", "typescript.tsx", "javascript.jsx", "css", "sass", "scss", "less", "svelte" },
                     init_options = {
-                        configurationSection = { "html", "css", "javascript" },
+                        configurationSection = { "html", "css", "javascript", "javascriptreact", "typescriptreact" },
                         embeddedLanguages = {
                             css = true,
                             javascript = true
